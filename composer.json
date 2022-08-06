@@ -6,6 +6,8 @@
     "license": "MIT",
     "require": {
         "php": ">=7.4",
+        "cakephp/authentication": "^2.9",
+        "cakephp/authorization": "^2.2",
         "cakephp/cakephp": "4.4.*",
         "cakephp/migrations": "^3.2",
         "cakephp/plugin-installer": "^1.3",
@@ -15,6 +17,7 @@
         "cakephp/bake": "^2.6",
         "cakephp/cakephp-codesniffer": "^4.5",
         "cakephp/debug_kit": "^4.5",
+        "dereuromark/cakephp-ide-helper": "^1.18",
         "josegonzalez/dotenv": "^3.2",
         "phpunit/phpunit": "~8.5.0 || ^9.3"
     },
@@ -45,7 +48,10 @@
         "cs-check": "phpcs --colors -p  src/ tests/",
         "cs-fix": "phpcbf --colors -p src/ tests/",
         "stan": "phpstan analyse",
-        "test": "phpunit --colors=always"
+        "test": "phpunit --colors=always",
+        "setup": "bin/cake code_completion generate && bin/cake phpstorm generate",
+        "serve": "bin/cake server",
+        "fresh": "bin/cake annotate all && bin/cake illuminator illuminate"
     },
     "prefer-stable": true,
     "config": {

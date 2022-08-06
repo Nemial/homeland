@@ -19,6 +19,7 @@
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  * @link          https://cakephp.org CakePHP(tm) Project
  * @license       https://opensource.org/licenses/mit-license.php MIT License
+ * @var \Cake\Routing\RouteBuilder $routes
  */
 
 use Cake\Routing\Route\DashedRoute;
@@ -50,12 +51,7 @@ return static function (RouteBuilder $routes) {
          * its action called 'display', and we pass a param to select the view file
          * to use (in this case, templates/Pages/home.php)...
          */
-        $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
-
-        /*
-         * ...and connect the rest of 'Pages' controller's URLs.
-         */
-        $builder->connect('/pages/*', 'Pages::display');
+        $builder->connect('/', ['controller' => 'Pages', 'action' => 'main']);
 
         /*
          * Connect catchall routes for all controllers.
@@ -72,7 +68,6 @@ return static function (RouteBuilder $routes) {
          */
         $builder->fallbacks();
     });
-
     /*
      * If you need a different set of middleware or none at all,
      * open new scope and define routes there.

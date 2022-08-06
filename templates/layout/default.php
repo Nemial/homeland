@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -13,8 +14,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  * @var \App\View\AppView $this
  */
-
-$cakeDescription = 'CakePHP: the rapid development php framework';
+$currentPath = $this->request->getPath();
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,36 +22,55 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
-        <?= $cakeDescription ?>:
-        <?= $this->fetch('title') ?>
+        <?= $this->fetch('title', '') ?>
     </title>
-    <?= $this->Html->meta('icon') ?>
-
-    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
-
-    <?= $this->Html->css(['normalize.min', 'milligram.min', 'cake']) ?>
 
     <?= $this->fetch('meta') ?>
+    <?= $this->Html->css(['main']) ?>
     <?= $this->fetch('css') ?>
+    <?= $this->Html->script(['main']) ?>
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <nav class="top-nav">
-        <div class="top-nav-title">
-            <a href="<?= $this->Url->build('/') ?>"><span>Cake</span>PHP</a>
-        </div>
-        <div class="top-nav-links">
-            <a target="_blank" rel="noopener" href="https://book.cakephp.org/4/">Documentation</a>
-            <a target="_blank" rel="noopener" href="https://api.cakephp.org/">API</a>
-        </div>
-    </nav>
-    <main class="main">
-        <div class="container">
-            <?= $this->Flash->render() ?>
-            <?= $this->fetch('content') ?>
-        </div>
-    </main>
-    <footer>
-    </footer>
+<header class="container">
+    <div class="d-flex bg-dark flex-wrap justify-content-center mb-4 py-3 px-4 border-bottom">
+        <a class="align-self-center mb-3 mb-md-0 text-white text-decoration-none navbar-brand"
+           href="<?= $this->Url->buildFromPath('Pages::main') ?>">
+            <?= __('Главная') ?>
+        </a>
+        <h1 class="text-white mx-auto">
+            Blog by <span class="text-primary">Nemial</span>
+        </h1>
+        <nav class="navbar navbar-expand-lg navbar-dark py-0">
+            <ul class="navbar-nav">
+                <?php
+                if (!$this->Identity->isLoggedIn()): ?>
+                    <?php
+                    $loginPath = $this->Url->buildFromPath('Users::login');
+                    $isLoginPage = $loginPath === $currentPath; ?>
+                    <li class="nav-item">
+                        <a class="nav-link <?= $isLoginPage ? 'active' : '' ?>"
+                            <?= $isLoginPage ? 'aria-current="page"' : '' ?> href='<?= $loginPath ?>'>
+                            <?= __('Войти') ?>
+                        </a>
+                    </li>
+                <?php
+                endif;
+                ?>
+            </ul>
+        </nav>
+    </div>
+</header>
+<main class="main">
+    <div class="container">
+        <?= $this->Flash->render() ?>
+        <?= $this->fetch('content') ?>
+    </div>
+</main>
+<footer>
+    <div class="container">
+
+    </div>
+</footer>
 </body>
 </html>
