@@ -1,8 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Entity;
 
+use Cake\Auth\DefaultPasswordHasher;
 use Cake\ORM\Entity;
 
 /**
@@ -16,6 +18,11 @@ use Cake\ORM\Entity;
  */
 class User extends Entity
 {
+    public const FIELD_ID = 'id';
+    public const FIELD_CREATED_AT = 'created_at';
+    public const FIELD_UPDATED_AT = 'updated_at';
+    public const FIELD_EMAIL = 'email';
+    public const FIELD_PASSWORD = 'password';
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -26,12 +33,11 @@ class User extends Entity
      * @var array<string, bool>
      */
     protected $_accessible = [
-        'created_at' => true,
-        'updated_at' => true,
+        'created_at' => false,
+        'updated_at' => false,
         'email' => true,
         'password' => true,
     ];
-
     /**
      * Fields that are excluded from JSON versions of the entity.
      *
@@ -41,9 +47,9 @@ class User extends Entity
         'password',
     ];
 
-	public const FIELD_ID = 'id';
-	public const FIELD_CREATED_AT = 'created_at';
-	public const FIELD_UPDATED_AT = 'updated_at';
-	public const FIELD_EMAIL = 'email';
-	public const FIELD_PASSWORD = 'password';
+    protected function _setPassword($value)
+    {
+        $hasher = new DefaultPasswordHasher();
+        return $hasher->hash($value);
+    }
 }

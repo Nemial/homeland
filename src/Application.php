@@ -23,6 +23,13 @@ use Authentication\AuthenticationServiceInterface;
 use Authentication\AuthenticationServiceProviderInterface;
 use Authentication\Identifier\IdentifierInterface;
 use Authentication\Middleware\AuthenticationMiddleware;
+use Authorization\AuthorizationService;
+use Authorization\AuthorizationServiceInterface;
+use Authorization\AuthorizationServiceProviderInterface;
+use Authorization\Exception\ForbiddenException;
+use Authorization\Exception\MissingIdentityException;
+use Authorization\Middleware\AuthorizationMiddleware;
+use Authorization\Policy\OrmResolver;
 use Cake\Core\Configure;
 use Cake\Core\ContainerInterface;
 use Cake\Datasource\FactoryLocator;
@@ -43,7 +50,8 @@ use Psr\Http\Message\ServerRequestInterface;
  * This defines the bootstrapping logic and middleware layers you
  * want to use in your application.
  */
-class Application extends BaseApplication implements AuthenticationServiceProviderInterface
+class Application extends BaseApplication implements AuthenticationServiceProviderInterface,
+                                                     AuthorizationServiceProviderInterface
 {
     /**
      * Load all the application configuration and bootstrap logic.
@@ -54,6 +62,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
     {
         // Call parent to load bootstrap from files.
         parent::bootstrap();
+        $this->addPlugin('Authorization');
 
         if (PHP_SAPI === 'cli') {
             $this->addPlugin('IdeHelper');
@@ -126,6 +135,19 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             // https://book.cakephp.org/4/en/controllers/middleware.html#body-parser-middleware
             ->add(new BodyParserMiddleware())
             ->add(new AuthenticationMiddleware($this))
+            ->add(
+                new AuthorizationMiddleware($this, [
+                    'unauthorizedHandler' => [
+                        'className' => 'CustomRedirect',
+                        'url' => '/',
+                        'queryParam' => 'redirectUrl',
+                        'exceptions' => [
+                            MissingIdentityException::class,
+                            ForbiddenException::class,
+                        ],
+                    ],
+                ])
+            )
             // Cross Site Request Forgery (CSRF) Protection Middleware
             // https://book.cakephp.org/4/en/security/csrf.html#cross-site-request-forgery-csrf-middleware
             ->add(
@@ -149,8 +171,8 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
     {
     }
 
-    public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
-    {
+    public function getAuthenticationService(ServerRequestInterface $request
+    ): AuthenticationServiceInterface {
         $service = new AuthenticationService();
 
         $service->setConfig(
@@ -184,5 +206,12 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         $service->loadIdentifier('Authentication.Password', compact('fields'));
 
         return $service;
+    }
+
+    public function getAuthorizationService(ServerRequestInterface $request
+    ): AuthorizationServiceInterface {
+        $resolver = new OrmResolver();
+
+        return new AuthorizationService($resolver);
     }
 }

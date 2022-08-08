@@ -1,30 +1,28 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\User $user
  */
+$this->assign('title', __('Регистрация'));
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Users'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+<div class="container-sm w-50">
+    <?= $this->Form->create($user) ?>
+    <h3 class="text-center"><?= __('Регистрация') ?></h3>
+    <fieldset>
+        <div class="mb-3">
+            <label for="email" class="form-label"><?= __('Email') ?></label>
+            <?= $this->Form->email('email', ['id' => 'email', 'class' => 'form-control', 'required' => true]
+            ) ?>
         </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="users form content">
-            <?= $this->Form->create($user) ?>
-            <fieldset>
-                <legend><?= __('Add User') ?></legend>
-                <?php
-                    echo $this->Form->control('created_at');
-                    echo $this->Form->control('updated_at');
-                    echo $this->Form->control('email');
-                    echo $this->Form->control('password');
-                ?>
-            </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
-            <?= $this->Form->end() ?>
+        <div class="mb-3">
+            <label for="password" class="form-label"><?= __('Пароль') ?></label>
+            <?= $this->Form->password(
+                'password',
+                ['id' => 'password', 'class' => 'form-control', 'required' => true]
+            ) ?>
         </div>
-    </div>
+    </fieldset>
+    <?= $this->Form->button(__('Зарегистрироваться'), ['class' => 'btn btn-dark w-100 mb-3']); ?>
+    <?= $this->Form->end() ?>
 </div>

@@ -10,6 +10,7 @@ class PagesController extends AppController
 {
     public function main()
     {
+        $this->Authorization->skipAuthorization();
     }
 
     public function beforeFilter(EventInterface $event)
