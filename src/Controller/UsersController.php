@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Model\Entity\User;
-use App\Model\Table\UsersTable;
 use Cake\Datasource\Exception\RecordNotFoundException;
 use Cake\Datasource\ResultSetInterface;
 use Cake\Event\EventInterface;
@@ -14,7 +13,7 @@ use Cake\Http\Response;
 /**
  * Users Controller
  *
- * @property UsersTable $Users
+ * @property \App\Model\Table\UsersTable $Users
  * @method User[]|ResultSetInterface paginate($object = null, array $settings = [])
  */
 class UsersController extends AppController

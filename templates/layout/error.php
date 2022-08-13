@@ -13,9 +13,14 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  * @var \App\View\AppView $this
  */
+
+use Cake\I18n\I18n;
+
+$explodedLocaleData = explode('_', I18n::getLocale());
+$currentLang = mb_strtolower($explodedLocaleData[0]);
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="<?= $currentLang ?>">
 <head>
     <?= $this->Html->charset() ?>
     <title>
@@ -32,10 +37,10 @@
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <div class="error-container">
-        <?= $this->Flash->render() ?>
-        <?= $this->fetch('content') ?>
-        <?= $this->Html->link(__('Back'), 'javascript:history.back()') ?>
-    </div>
+<div class="error-container">
+    <?= $this->Flash->render() ?>
+    <?= $this->fetch('content') ?>
+    <?= $this->Html->link(__('Back'), 'javascript:history.back()') ?>
+</div>
 </body>
 </html>

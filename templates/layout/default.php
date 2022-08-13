@@ -12,10 +12,9 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
- * @var AppView $this
+ * @var \App\View\AppView $this
  */
 
-use App\View\AppView;
 use Cake\I18n\I18n;
 
 $currentPath = $this->request->getPath();
@@ -23,7 +22,7 @@ $explodedLocaleData = explode('_', I18n::getLocale());
 $currentLang = mb_strtolower($explodedLocaleData[0]);
 ?>
 <!DOCTYPE html>
-<html lang="<?= $currentLang ?>">
+<html lang="<?= h($currentLang) ?>">
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">

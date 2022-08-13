@@ -13,13 +13,18 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  * @var \App\View\AppView $this
  */
+
+use Cake\I18n\I18n;
+
+$explodedLocaleData = explode('_', I18n::getLocale());
+$currentLang = mb_strtolower($explodedLocaleData[0]);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
-<html>
+<html lang="<?= h($currentLang) ?>">
 <head>
     <title><?= $this->fetch('title') ?></title>
 </head>
 <body>
-    <?= $this->fetch('content') ?>
+<?= $this->fetch('content') ?>
 </body>
 </html>

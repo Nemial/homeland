@@ -10,17 +10,17 @@
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
             <?= $this->Form->postLink(
-                __('Delete'),
+                __('Удалить'),
                 ['action' => 'delete', $user->id],
                 [
-                    'confirm' => __('Are you sure you want to delete # {0}?', $user->id),
-                    'class' => 'side-nav-item',
+                    'confirm' => __('Вы уверены что хотите удалить # {0}?', $user->id),
+                    'class' => 'link-danger',
                 ]
             ) ?>
             <?= $this->Html->link(
-                __('List Users'),
+                __('Список'),
                 ['action' => 'index'],
-                ['class' => 'side-nav-item']
+                ['class' => 'link-dark']
             ) ?>
         </div>
     </aside>

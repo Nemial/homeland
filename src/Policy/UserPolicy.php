@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Policy;
 
 use App\Model\Entity\User;
+use Authorization\Identity;
 use Authorization\IdentityInterface;
 
 /**
@@ -15,12 +16,12 @@ class UserPolicy
     /**
      * Check if $user can edit User
      *
-     * @param \Authorization\IdentityInterface $user The user.
-     * @param \App\Model\Entity\User $resource
+     * @param IdentityInterface $user The user.
+     * @param User $resource
      *
      * @return bool
      */
-    public function canEdit(IdentityInterface $user, User $resource): bool
+    public function canEdit(Identity $user, User $resource): bool
     {
         return $user->id === $resource->id;
     }
@@ -28,12 +29,12 @@ class UserPolicy
     /**
      * Check if $user can delete User
      *
-     * @param \Authorization\IdentityInterface $user The user.
-     * @param \App\Model\Entity\User $resource
+     * @param IdentityInterface $user The user.
+     * @param User $resource
      *
      * @return bool
      */
-    public function canDelete(IdentityInterface $user, User $resource)
+    public function canDelete(Identity $user, User $resource)
     {
         return $user->id === 1;
     }
@@ -41,12 +42,12 @@ class UserPolicy
     /**
      * Check if $user can view User
      *
-     * @param \Authorization\IdentityInterface $user The user.
-     * @param \App\Model\Entity\User $resource
+     * @param IdentityInterface $user The user.
+     * @param User $resource
      *
      * @return bool
      */
-    public function canView(IdentityInterface $user, User $resource)
+    public function canView(Identity $user, User $resource)
     {
         return $user->id === $resource->id;
     }
