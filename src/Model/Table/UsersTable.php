@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
-use App\Model\Entity\User;
-use Cake\Datasource\EntityInterface;
-use Cake\Datasource\ResultSetInterface;
 use Cake\ORM\Behavior\TimestampBehavior;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -15,21 +12,23 @@ use Cake\Validation\Validator;
 /**
  * Users Model
  *
- * @method User newEmptyEntity()
- * @method User newEntity(array $data, array $options = [])
- * @method User[] newEntities(array $data, array $options = [])
- * @method User get($primaryKey, $options = [])
- * @method User findOrCreate($search, ?callable $callback = null, $options = [])
- * @method User patchEntity(EntityInterface $entity, array $data, array $options = [])
- * @method User[] patchEntities(iterable $entities, array $data, array $options = [])
- * @method User|false save(EntityInterface $entity, $options = [])
- * @method User saveOrFail(EntityInterface $entity, $options = [])
- * @method User[]|ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method User[]|ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method User[]|ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method User[]|ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\User newEmptyEntity()
+ * @method \App\Model\Entity\User newEntity(array $data, array $options = [])
+ * @method \App\Model\Entity\User[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\User get($primaryKey, $options = [])
+ * @method \App\Model\Entity\User findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\User patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\User[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \App\Model\Entity\User|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\User saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  * @mixin TimestampBehavior
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
+ * @property \App\Model\Table\GroupsTable&\Cake\ORM\Association\BelongsToMany $Groups
+ * @property \Cake\ORM\Table&\Cake\ORM\Association\HasMany $GroupsUsers
  */
 class UsersTable extends Table
 {
@@ -48,7 +47,15 @@ class UsersTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
-        $this->addBehavior('Timestamp');
+        $this->addBehavior('Timestamp', [
+            'events' => [
+                'Model.beforeSave' => [
+                    'updated_at' => 'always',
+                ],
+            ],
+        ]);
+
+        $this->belongsToMany('Groups');
     }
 
     /**

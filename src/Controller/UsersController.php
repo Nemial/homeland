@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Model\Entity\User;
-use Cake\Datasource\Exception\RecordNotFoundException;
-use Cake\Datasource\ResultSetInterface;
 use Cake\Event\EventInterface;
 use Cake\Http\Response;
 
@@ -14,16 +11,16 @@ use Cake\Http\Response;
  * Users Controller
  *
  * @property \App\Model\Table\UsersTable $Users
- * @method User[]|ResultSetInterface paginate($object = null, array $settings = [])
+ * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class UsersController extends AppController
 {
     /**
      * Index method
      *
-     * @return Response|null|void Renders view
+     * @return void Renders view
      */
-    public function index()
+    public function index(): void
     {
         $this->Authorization->authorize($this->Users);
         $users = $this->paginate($this->Users);
@@ -33,15 +30,14 @@ class UsersController extends AppController
     /**
      * View method
      *
-     * @param string|null $id User id.
+     * @param int|null $id User id.
      *
-     * @return Response|null|void Renders view
-     * @throws RecordNotFoundException When record not found.
+     * @return void Renders view
      */
-    public function view($id = null)
+    public function view(int $id = null): void
     {
         $user = $this->Users->get($id, [
-            'contain' => [],
+            'contain' => 'Groups',
         ]);
         $this->Authorization->authorize($user);
 
@@ -67,6 +63,10 @@ class UsersController extends AppController
             }
 
             $user = $this->Users->patchEntity($user, $userData);
+
+            $defaultGroup = $this->Users->Groups->findByName('user')->firstOrFail();
+            $user->groups = [$defaultGroup];
+
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('Пользователь создан'));
                 return $this->redirect(['action' => 'login']);
@@ -77,47 +77,48 @@ class UsersController extends AppController
     }
 
     /**
-     * Edit method
      *
-     * @param string|null $id User id.
+     * method
+     *
+     * @param int|null $id User id.
      *
      * @return Response|null|void Redirects on successful edit, renders view otherwise.
-     * @throws RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit(int $id = null)
     {
-        $user = $this->Users->get($id);
+        $user = $this->Users->get($id, ['contain' => 'Groups']);
         $this->Authorization->authorize($user);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('Пользователь обновлён'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            $this->Flash->error(__('Произошла ошибка при обновлении. Попробуйте позже'));
         }
-        $this->set(compact('user'));
+
+        $groups = $this->Users->Groups->find('list')->all();
+        $this->set(compact('user', 'groups'));
     }
 
     /**
      * Delete method
      *
-     * @param string|null $id User id.
+     * @param int|null $id User id.
      *
-     * @return Response|null|void Redirects to index.
-     * @throws RecordNotFoundException When record not found.
+     * @return Response|null Redirects to index.
      */
-    public function delete($id = null)
+    public function delete(int $id = null): ?Response
     {
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
         $this->Authorization->authorize($user);
         if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
+            $this->Flash->success(__('Пользователь удалён'));
         } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            $this->Flash->error(__('Пользователь не может быть удалён. Попробуйте позже'));
         }
 
         return $this->redirect(['action' => 'index']);
@@ -137,7 +138,7 @@ class UsersController extends AppController
         }
     }
 
-    public function logout()
+    public function logout(): ?Response
     {
         $this->Authorization->skipAuthorization();
 

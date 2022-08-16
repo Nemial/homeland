@@ -24,13 +24,20 @@ $this->assign('title', __('Вход'))
                 ['id' => 'password', 'class' => 'form-control', 'required' => true]
             ) ?>
         </div>
+        <div class="mb-3 form-check">
+            <label for="remember_me" class="form-check-label"><?= __('Запомнить меня?') ?></label>
+            <?= $this->Form->checkbox(
+                'remember_me',
+                ['id' => 'remember_me', 'class' => 'form-check-input', 'required' => true]
+            ) ?>
+        </div>
     </fieldset>
     <?= $this->Form->button(__('Войти'), ['class' => 'btn btn-dark w-100 mb-3']); ?>
-    <p class="small">Если нет аккаунта, то поможет <a class="link-primary"
-                                                      href="<?= $this->Url->buildFromPath(
-                                                          'Users::add'
-                                                      ) ?>">
+    <p class="small">
+        Если нет аккаунта, то поможет
+        <a class="link-primary" href="<?= $this->Url->buildFromPath('Users::add') ?>">
             <?= __('Регистрация') ?>
-        </a></p>
+        </a>
+    </p>
     <?= $this->Form->end() ?>
 </div>

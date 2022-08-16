@@ -40,7 +40,7 @@ $this->assign('title', "Пользователь #{$user->id}")
             </tr>
             <tr class="table-primary">
                 <th><?= __('Id') ?></th>
-                <td><?= $this->Number->format($user->id) ?></td>
+                <td><?= h($this->Number->format($user->id)) ?></td>
             </tr>
             <tr class="table-danger">
                 <th><?= __('Created At') ?></th>
@@ -49,6 +49,10 @@ $this->assign('title', "Пользователь #{$user->id}")
             <tr class="table-danger">
                 <th><?= __('Updated At') ?></th>
                 <td><?= h($user->updated_at) ?></td>
+            </tr>
+            <tr class="table-info">
+                <th><?= __('Groups') ?></th>
+                <td><?= h($user->group_string) ?></td>
             </tr>
         </table>
     </div>

@@ -13,9 +13,11 @@ use Authorization\Policy\Result;
  */
 class UsersTablePolicy
 {
-    public function canIndex(Identity $user, UsersTable $query): Result
+    public function canIndex(Identity $identity, UsersTable $query): Result
     {
-        if ($user->id === 1) {
+        $user = $query->get($identity->getIdentifier(), ['contain' => 'Groups']);
+
+        if ($user->is_admin) {
             return new Result(true);
         } else {
             return new Result(false);

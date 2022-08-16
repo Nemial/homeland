@@ -16,39 +16,39 @@ class UserPolicy
     /**
      * Check if $user can edit User
      *
-     * @param IdentityInterface $user The user.
-     * @param User $resource
+     * @param IdentityInterface $iden The user.
+     * @param User $user
      *
      * @return bool
      */
-    public function canEdit(Identity $user, User $resource): bool
+    public function canEdit(Identity $identity, User $user): bool
     {
-        return $user->id === $resource->id;
+        return $identity->getIdentifier() === $user->id || $user->is_admin;
     }
 
     /**
      * Check if $user can delete User
      *
-     * @param IdentityInterface $user The user.
-     * @param User $resource
+     * @param IdentityInterface $identity The user.
+     * @param User $user
      *
      * @return bool
      */
-    public function canDelete(Identity $user, User $resource)
+    public function canDelete(Identity $identity, User $user)
     {
-        return $user->id === 1;
+        return $user->is_admin;
     }
 
     /**
      * Check if $user can view User
      *
-     * @param IdentityInterface $user The user.
-     * @param User $resource
+     * @param IdentityInterface $identity The user.
+     * @param User $user
      *
      * @return bool
      */
-    public function canView(Identity $user, User $resource)
+    public function canView(Identity $identity, User $user)
     {
-        return $user->id === $resource->id;
+        return $user->is_admin || $identity->getIdentifier() === $user->id;
     }
 }

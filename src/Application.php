@@ -203,6 +203,16 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             ]),
         ]);
 
+        $service->loadAuthenticator('Authentication.Cookie', [
+            'fields' => $fields,
+            'loginUrl' => Router::url([
+                'prefix' => false,
+                'plugin' => null,
+                'controller' => 'Users',
+                'action' => 'login',
+            ]),
+        ]);
+
         $service->loadIdentifier('Authentication.Password', compact('fields'));
 
         return $service;
