@@ -28,7 +28,7 @@ $this->assign('title', __('Вход'))
             <label for="remember_me" class="form-check-label"><?= __('Запомнить меня?') ?></label>
             <?= $this->Form->checkbox(
                 'remember_me',
-                ['id' => 'remember_me', 'class' => 'form-check-input', 'required' => true]
+                ['id' => 'remember_me', 'class' => 'form-check-input']
             ) ?>
         </div>
     </fieldset>
