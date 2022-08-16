@@ -42,6 +42,7 @@ use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
 use Cake\Routing\Router;
+use DateTime;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
@@ -211,6 +212,9 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
                 'controller' => 'Users',
                 'action' => 'login',
             ]),
+            'cookie' => [
+                'expires' => new DateTime('+7 days'),
+            ]
         ]);
 
         $service->loadIdentifier('Authentication.Password', compact('fields'));
