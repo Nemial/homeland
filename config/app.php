@@ -57,9 +57,9 @@ return [
         'wwwRoot' => WWW_ROOT,
         //'baseUrl' => env('SCRIPT_NAME'),
         'fullBaseUrl' => false,
-        'imageBaseUrl' => 'static/img/',
-        'cssBaseUrl' => 'static/css/',
-        'jsBaseUrl' => 'static/js/',
+        'imageBaseUrl' => 'assets/img/',
+        'cssBaseUrl' => 'assets/css/',
+        'jsBaseUrl' => 'assets/js/',
         'paths' => [
             'plugins' => [ROOT . DS . 'plugins' . DS],
             'templates' => [ROOT . DS . 'templates' . DS],

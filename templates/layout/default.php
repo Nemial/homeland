@@ -33,7 +33,7 @@ $currentLang = mb_strtolower($explodedLocaleData[0]);
     <?= $this->fetch('meta') ?>
     <?= $this->Html->css(['main']) ?>
     <?= $this->fetch('css') ?>
-    <?= $this->Html->script(['main']) ?>
+    <?= $this->Html->script(['libraries', 'main']) ?>
     <?= $this->fetch('script') ?>
 </head>
 <body class="">

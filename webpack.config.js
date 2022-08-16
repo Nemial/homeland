@@ -4,10 +4,13 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-    entry: './resources/js/index.js',
+    entry: {
+        libraries: './resources/js/libraries.js',
+        main: './resources/js/main.js'
+    },
     output: {
-        filename: 'js/main.js',
-        path: path.resolve(__dirname, './webroot/static'),
+        filename: 'js/[name].js',
+        path: path.resolve(__dirname, './webroot/assets'),
         publicPath: '',
     },
     module: {
@@ -15,7 +18,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 use: 'babel-loader',
-                exclude: '/node_modules/',
+                exclude: path.resolve(__dirname, './node_modules'),
             },
             {
                 test: /\.(scss)$/,

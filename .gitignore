@@ -53,4 +53,4 @@ yarn-debug.log
 yarn-error.log
 
 # webpack builds
-/webroot/static/
+/webroot/assets/
