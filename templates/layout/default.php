@@ -48,7 +48,7 @@ $currentLang = mb_strtolower($explodedLocaleData[0]);
                     </a>
                     <ul class="dropdown-menu">
                         <?php
-                        if ($this->Identity->is(1)) : ?>
+                        if ($this->Identity->get('is_admin') && $this->Identity->isLoggedIn()) : ?>
                             <li>
                                 <a class="dropdown-item"
                                    href="<?= $this->Url->buildFromPath('Users::index') ?>">
@@ -63,7 +63,8 @@ $currentLang = mb_strtolower($explodedLocaleData[0]);
                 <li class="nav-item">
                     <a href="<?= $this->Url->buildFromPath('Pages::main') ?>"
                        class="navbar-brand m-0 fs-3">
-                        Blog by <span class="text-primary">Nemial</span>
+                        Blog by
+                        <span class="text-primary">Nemial</span>
                     </a>
                 </li>
                 <?php
