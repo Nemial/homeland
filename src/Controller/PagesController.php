@@ -13,9 +13,14 @@ class PagesController extends AppController
         $this->Authorization->skipAuthorization();
     }
 
+    public function about()
+    {
+        $this->Authorization->skipAuthorization();
+    }
+
     public function beforeFilter(EventInterface $event)
     {
         parent::beforeFilter($event);
-        $this->Authentication->allowUnauthenticated(['main']);
+        $this->Authentication->allowUnauthenticated(['main', 'about']);
     }
 }

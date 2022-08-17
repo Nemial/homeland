@@ -52,6 +52,7 @@ return static function (RouteBuilder $routes) {
          * to use (in this case, templates/Pages/home.php)...
          */
         $builder->connect('/', ['controller' => 'Pages', 'action' => 'main']);
+        $builder->connect('/about', ['controller' => 'Pages', 'action' => 'about']);
 
         /*
          * Connect catchall routes for all controllers.

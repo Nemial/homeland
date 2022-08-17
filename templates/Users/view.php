@@ -13,20 +13,20 @@ $this->assign('title', "Пользователь #{$user->id}")
         <?= $this->Html->link(
             __('Обновить'),
             ['action' => 'edit', $user->id],
-            ['class' => 'link-success']
+            ['class' => 'link-success me-1']
         ) ?>
         <?= $this->Form->postLink(
             __('Удалить'),
             ['action' => 'delete', $user->id],
             [
                 'confirm' => __('Вы уверены, что хотите удалить # {0}?', $user->id),
-                'class' => 'link-danger',
+                'class' => 'link-danger me-1',
             ]
         ) ?>
         <?= $this->Html->link(
             __('Список'),
             ['action' => 'index'],
-            ['class' => 'link-dark']
+            ['class' => 'link-dark me-1']
         ) ?>
         <?= $this->Html->link(__('Создать'), ['action' => 'add'], ['class' => 'link-info']
         ) ?>
