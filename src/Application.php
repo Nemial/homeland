@@ -214,7 +214,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             ]),
             'cookie' => [
                 'expires' => new DateTime('+7 days'),
-            ]
+            ],
         ]);
 
         $service->loadIdentifier('Authentication.Password', compact('fields'));

@@ -20,27 +20,25 @@ $explodedLocaleData = explode('_', I18n::getLocale());
 $currentLang = mb_strtolower($explodedLocaleData[0]);
 ?>
 <!DOCTYPE html>
-<html lang="<?= $currentLang ?>">
+<html lang="<?= h($currentLang) ?>">
 <head>
     <?= $this->Html->charset() ?>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
         <?= $this->fetch('title') ?>
     </title>
-    <?= $this->Html->meta('icon') ?>
-
-    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
-
-    <?= $this->Html->css(['normalize.min', 'milligram.min', 'cake']) ?>
 
     <?= $this->fetch('meta') ?>
+    <?= $this->Html->css(['main']) ?>
     <?= $this->fetch('css') ?>
+    <?= $this->Html->script(['libraries', 'main']) ?>
     <?= $this->fetch('script') ?>
 </head>
 <body>
-<div class="error-container">
+<div class="container">
     <?= $this->Flash->render() ?>
     <?= $this->fetch('content') ?>
-    <?= $this->Html->link(__('Back'), 'javascript:history.back()') ?>
+    <?= $this->Html->link(__('Назад'), 'javascript:history.back()') ?>
 </div>
 </body>
 </html>
