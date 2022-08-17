@@ -45,7 +45,7 @@
                 ) ?>
             </div>
             <?php
-            if ($user->is_admin): ?>
+            if ($this->Identity->get('is_admin')): ?>
                 <div class="mb-3">
                     <label for="groups" class="form-label"><?= __('Группы') ?></label>
                     <?= $this->Form->select(
