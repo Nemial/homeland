@@ -40,7 +40,7 @@ $selectedNavItemClass = 'text-orange';
 <body>
 <header>
     <div class="container bg-dark py-3 rounded-bottom mb-4">
-        <nav class="navbar navbar-expand-lg navbar-dark">
+        <nav class="navbar navbar-expand-sm navbar-dark">
             <ul class="navbar-nav container-fluid justify-content-between">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button"
