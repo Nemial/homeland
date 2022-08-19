@@ -134,14 +134,18 @@ $selectedNavItemClass = 'text-orange';
         </div>
         <div class="text-center">
             <h4 class="text-white">Контакты</h4>
-            <ul class="addresses list-unstyled m-0">
-                <a class="link link_type_email" href="mailto:<?= Configure::read('Credentials.email') ?>">
-                    Email
-                </a>
-                <a class="link link_type_telegram"
-                   href="tg://resolve?domain=<?= Configure::read('Credentials.tg') ?>">
-                    Telegram
-                </a>
+            <ul class="list-unstyled list-inline m-0">
+                <li class="list-inline-item">
+                    <a class="link link_type_email" href="mailto:<?= Configure::read('Credentials.email') ?>">
+                        Email
+                    </a>
+                </li>
+                <li class="list-inline-item">
+                    <a class="link link_type_telegram"
+                       href="tg://resolve?domain=<?= Configure::read('Credentials.tg') ?>">
+                        Telegram
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
