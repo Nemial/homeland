@@ -8,8 +8,8 @@
 $this->assign('title', "Пользователь #{$user->id}")
 ?>
 <div class="container">
-    <aside class="container-sm mb-3">
-        <h4><?= __('Действия') ?></h4>
+    <aside class="container-sm mb-3 fs-4">
+        <h3><?= __('Действия') ?></h3>
         <?= $this->Html->link(
             __('Обновить'),
             ['action' => 'edit', $user->id],
@@ -33,7 +33,7 @@ $this->assign('title', "Пользователь #{$user->id}")
     </aside>
     <div class="container-sm d-flex flex-column justify-content-start">
         <h2>#<?= h($user->id) ?></h2>
-        <table class="table">
+        <table class="table fs-4">
             <tr class="table-info">
                 <th><?= __('Email') ?></th>
                 <td><?= h($user->email) ?></td>

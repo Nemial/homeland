@@ -18,6 +18,7 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Model\Table\UsersTable;
 use Authentication\AuthenticationService;
 use Authentication\AuthenticationServiceInterface;
 use Authentication\AuthenticationServiceProviderInterface;
@@ -215,6 +216,16 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             'cookie' => [
                 'expires' => new DateTime('+7 days'),
             ],
+        ]);
+
+        $service->loadIdentifier('Authentication.Callback', [
+            'callback' => function ($data) {
+                if (empty($data)) {
+                    return null;
+                }
+                $User = new UsersTable();
+                return $User->findByEmail($data['username'])->contain('Groups')->first();
+            },
         ]);
 
         $service->loadIdentifier('Authentication.Password', compact('fields'));

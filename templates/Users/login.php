@@ -9,19 +9,19 @@ $this->assign('title', __('Вход'))
 <div class="container-sm w-50">
     <?= $this->Form->create() ?>
     <h3 class="text-center"><?= __('Вход') ?></h3>
-    <fieldset>
+    <fieldset class="fs-4">
         <div class="mb-3">
             <label for="email" class="form-label"><?= __('Email') ?></label>
             <?= $this->Form->email(
                 'email',
-                ['id' => 'email', 'class' => 'form-control', 'required' => true]
+                ['id' => 'email', 'class' => 'form-control fs-4', 'required' => true]
             ) ?>
         </div>
         <div class="mb-3">
             <label for="password" class="form-label"><?= __('Пароль') ?></label>
             <?= $this->Form->password(
                 'password',
-                ['id' => 'password', 'class' => 'form-control', 'required' => true]
+                ['id' => 'password', 'class' => 'form-control fs-4', 'required' => true]
             ) ?>
         </div>
         <div class="mb-3 form-check">
@@ -32,8 +32,8 @@ $this->assign('title', __('Вход'))
             ) ?>
         </div>
     </fieldset>
-    <?= $this->Form->button(__('Войти'), ['class' => 'btn btn-dark w-100 mb-3']); ?>
-    <p class="small">
+    <?= $this->Form->button(__('Войти'), ['class' => 'btn btn-dark w-100 mb-3 fs-4']); ?>
+    <p class="fs-5">
         Если нет аккаунта, то поможет
         <a class="link-primary" href="<?= $this->Url->buildFromPath('Users::add') ?>">
             <?= __('Регистрация') ?>

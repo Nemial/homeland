@@ -7,10 +7,9 @@
  */
 
 ?>
-<div class="row">
-    <aside class="column">
+    <aside class="column fs-4">
         <div class="side-nav">
-            <h4 class="heading"><?= __('Действия') ?></h4>
+            <h3><?= __('Действия') ?></h3 class="heading">
             <?= $this->Html->link(
                 __('Список'),
                 ['action' => 'index'],
@@ -28,20 +27,20 @@
     </aside>
     <div class="container-sm w-50">
         <?= $this->Form->create($user) ?>
-        <fieldset>
-            <h3 class="text-center"><?= __('Редактирование пользователя') ?></h3>
+        <fieldset class="fs-4">
+            <h2 class="text-center"><?= __('Редактирование пользователя') ?></h2>
             <div class="mb-3">
                 <label for="email" class="form-label"><?= __('Email') ?></label>
                 <?= $this->Form->email(
                     'email',
-                    ['id' => 'email', 'class' => 'form-control', 'required' => true]
+                    ['id' => 'email', 'class' => 'form-control fs-4', 'required' => true]
                 ) ?>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label"><?= __('Пароль') ?></label>
                 <?= $this->Form->text(
                     'password',
-                    ['id' => 'password', 'class' => 'form-control', 'required' => true]
+                    ['id' => 'password', 'class' => 'form-control fs-4', 'required' => true]
                 ) ?>
             </div>
             <?php
@@ -51,13 +50,12 @@
                     <?= $this->Form->select(
                         'groups._ids',
                         $groups,
-                        ['class' => 'form-select', 'multiple' => true]
+                        ['class' => 'form-select fs-4', 'multiple' => true]
                     ) ?>
                 </div>
             <?php
             endif; ?>
         </fieldset>
-        <?= $this->Form->button(__('Отправить'), ['class' => 'btn btn-dark w-100']) ?>
+        <?= $this->Form->button(__('Отправить'), ['class' => 'btn btn-dark w-100 fs-4']) ?>
         <?= $this->Form->end() ?>
     </div>
-</div>

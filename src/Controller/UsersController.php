@@ -23,7 +23,7 @@ class UsersController extends AppController
     public function index(): void
     {
         $this->Authorization->authorize($this->Users);
-        $users = $this->paginate($this->Users);
+        $users = $this->paginate($this->Users, ['maxLimit' => 9, 'order' => ['Users.id' => 'asc']]);
         $this->set(compact('users'));
     }
 

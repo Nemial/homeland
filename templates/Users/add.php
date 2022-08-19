@@ -10,22 +10,22 @@ $this->assign('title', __('Регистрация'));
 <div class="container-sm w-50">
     <?= $this->Form->create($user) ?>
     <h3 class="text-center"><?= __('Регистрация') ?></h3>
-    <fieldset>
+    <fieldset class="fs-4">
         <div class="mb-3">
             <label for="email" class="form-label"><?= __('Email') ?></label>
             <?= $this->Form->email(
                 'email',
-                ['id' => 'email', 'class' => 'form-control', 'required' => true]
+                ['id' => 'email', 'class' => 'form-control fs-4', 'required' => true]
             ) ?>
         </div>
         <div class="mb-3">
             <label for="password" class="form-label"><?= __('Пароль') ?></label>
             <?= $this->Form->password(
                 'password',
-                ['id' => 'password', 'class' => 'form-control', 'required' => true]
+                ['id' => 'password', 'class' => 'form-control fs-4', 'required' => true]
             ) ?>
         </div>
     </fieldset>
-    <?= $this->Form->button(__('Зарегистрироваться'), ['class' => 'btn btn-dark w-100 mb-3']); ?>
+    <?= $this->Form->button(__('Зарегистрироваться'), ['class' => 'btn btn-dark w-100 fs-4']); ?>
     <?= $this->Form->end() ?>
 </div>

@@ -7,7 +7,8 @@ module.exports = {
         autoprefixer,
         cssnano({preset: 'default'}),
         purgecss({
-            content: ['./templates/**/*.php'],
+            content: ['./templates/**/*.php', './config/paginator-templates.php'],
+            safelist: ['show'],
         }),
     ],
 };

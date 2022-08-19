@@ -7,7 +7,7 @@
 
 $this->assign('title', 'Пользователи')
 ?>
-<div class="container-lg">
+<div class="container-lg fs-4">
     <div class="d-flex justify-content-between">
         <h1><?= __('Пользователи') ?></h1>
         <a class="align-self-center" href="<?= $this->Url->buildFromPath('Users::add') ?>"><?= __(
@@ -58,7 +58,7 @@ $this->assign('title', 'Пользователи')
     </table>
 </div>
 <div class="container d-flex align-items-center flex-column mt-2">
-    <ul class="pagination">
+    <ul class="pagination zoom">
         <?= $this->Paginator->first('<< ',) ?>
         <?= $this->Paginator->prev(__('--i')) ?>
         <?= $this->Paginator->numbers() ?>
