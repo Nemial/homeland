@@ -14,8 +14,9 @@ const PATHS = {
 
 module.exports = {
     entry: {
-        libraries: './resources/js/libraries.js',
+        bootstrap5: './resources/js/bootstrap5.js',
         main: './resources/js/main.js',
+        editor: './resources/js/editor.js',
     },
     output: {
         filename: 'js/[name].js',
@@ -67,6 +68,7 @@ module.exports = {
         }),
         new PurgecssPlugin({
             paths: glob.sync(`${PATHS.templateDir}/**/*.php`, {nodir: true}),
+            safelist: ['ck-editor__editable'],
         }),
         new CopyPlugin({
             patterns: [

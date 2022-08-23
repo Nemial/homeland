@@ -4,6 +4,9 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Article $article
  */
+
+$this->Html->css(['editor'], ['block' => true]);
+$this->Html->script(['editor'], ['block' => true]);
 $this->assign('title', 'Добавить статью');
 ?>
 <aside class="column">
