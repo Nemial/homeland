@@ -38,7 +38,7 @@ $selectedNavItemClass = 'text-orange';
     <?= $this->fetch('script') ?>
 </head>
 <body class="page">
-<header class="page__header mb-4">
+<header class="page__header">
     <div class="container bg-dark rounded-bottom">
         <nav class="navbar navbar-expand-sm navbar-dark">
             <ul class="navbar-nav container-fluid justify-content-between">
@@ -121,7 +121,7 @@ $selectedNavItemClass = 'text-orange';
         <?= $this->fetch('content') ?>
     </div>
 </main>
-<footer class="page__footer mt-4">
+<footer class="page__footer">
     <div class="container-sm bg-dark py-2 rounded-top d-flex justify-content-between">
         <div class="col">
             <p class="text-white m-0">
