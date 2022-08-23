@@ -37,7 +37,8 @@ tests.sqlite
 # Eclipse
 .settings/*
 # JetBrains, aka PHPStorm, IntelliJ IDEA
-.idea/*
+/.phpstorm.meta.php/
+/.idea/*
 # NetBeans
 nbproject/*
 # Visual Studio Code
