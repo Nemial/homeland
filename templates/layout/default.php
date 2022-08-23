@@ -37,7 +37,7 @@ $this->Html->script(['bootstrap5', 'main'], ['block' => true]);
     <?= $this->fetch('script') ?>
 </head>
 <body class="page">
-<header class="page__header">
+<header class="page__header mb-4">
     <div class="container-sm bg-dark rounded-bottom">
         <?= $this->element('header/menu') ?>
     </div>
@@ -48,7 +48,7 @@ $this->Html->script(['bootstrap5', 'main'], ['block' => true]);
         <?= $this->fetch('content') ?>
     </div>
 </main>
-<footer class="page__footer">
+<footer class="page__footer mt-4">
     <div class="container-sm bg-dark py-2 rounded-top d-flex justify-content-between">
         <div>
             <?= $this->element('footer/info') ?>
