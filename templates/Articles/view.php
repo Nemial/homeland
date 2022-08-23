@@ -4,7 +4,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Article $article
  */
-$this->assign('title', "Статья - $article->title")
+$this->assign('title', "Блог от Nemial | $article->title")
 ?>
 <aside class="container-sm mb-3">
     <h3 class="heading"><?= __('Действия') ?></h3>
@@ -50,6 +50,16 @@ $this->assign('title', "Статья - $article->title")
         <tr class="table-danger">
             <th><?= __('Дата обновления') ?></th>
             <td><?= h($article->updated_at) ?></td>
+        </tr>
+        <tr class="table-primary">
+            <th><?= __('Автор') ?></th>
+            <td>
+                <?= $this->Html->link(
+                    h($article->user->email),
+                    ['controller' => 'Users', 'action' => 'view', $article->user->id],
+                    ['class' => 'link-dark']
+                ) ?>
+            </td>
         </tr>
     </table>
 </div>

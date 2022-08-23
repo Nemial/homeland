@@ -40,7 +40,7 @@ class ArticlesController extends AppController
     {
         $this->Authorization->skipAuthorization();
         $article = $this->Articles->get($id, [
-            'contain' => [],
+            'contain' => ['Users'],
         ]);
 
         $this->set(compact('article'));
