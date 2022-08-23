@@ -19,6 +19,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\Group[] $groups
  * @property string $group_string
  * @property bool $is_admin
+ * @property \App\Model\Entity\Article[] $articles
  */
 class User extends Entity
 {
@@ -30,6 +31,7 @@ class User extends Entity
     public const FIELD_GROUPS = 'groups';
     public const FIELD_GROUP_STRING = 'group_string';
     public const FIELD_IS_ADMIN = 'is_admin';
+	public const FIELD_ARTICLES = 'articles';
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *

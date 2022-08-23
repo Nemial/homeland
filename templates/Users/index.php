@@ -7,13 +7,14 @@
 
 $this->assign('title', 'Пользователи')
 ?>
-<div class="container-lg fs-4">
+<div class="d-flex flex-column justify-content-between">
     <div class="d-flex justify-content-between">
         <h1><?= __('Пользователи') ?></h1>
-        <a class="align-self-center" href="<?= $this->Url->buildFromPath('Users::add') ?>"><?= __(
-                'Добавить пользователя'
-            ) ?>
-        </a>
+        <?= $this->Html->link(
+            __('Добавить пользователя'),
+            ['action' => 'add'],
+            ['class' => 'align-self-center']
+        ) ?>
     </div>
     <table class="table table-hover">
         <thead>
@@ -58,7 +59,7 @@ $this->assign('title', 'Пользователи')
     </table>
 </div>
 <div class="container d-flex align-items-center flex-column mt-2">
-    <ul class="pagination zoom">
+    <ul class="pagination">
         <?= $this->Paginator->first('<< ',) ?>
         <?= $this->Paginator->prev(__('--i')) ?>
         <?= $this->Paginator->numbers() ?>

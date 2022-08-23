@@ -1,0 +1,74 @@
+{#
+/**
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
+ * @since         2.0.0
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ */
+#}
+{% set fields = Bake.filterFields(fields, schema, modelObject) %}
+<aside class="column">
+    <h4><?= __('Действия') ?></h4>
+    {% if 'add' not in action %}
+        <?= $this->Form->postLink(
+        __('Удалить'),
+        ['action' => 'delete', ${{ singularVar }}->{{ primaryKey[0] }}],
+        [
+        'confirm' => __('Вы уверены что хотите удалить # {0}?', ${{ singularVar }}->{{ primaryKey[0] }}),
+        'class' => 'link-danger me-2',
+        ]
+        ) ?>
+    {% endif %}
+    <?= $this->Html->link(__('List {{ pluralHumanName }}'), ['action' => 'index'], ['class' =>
+    'link-dark me-2']) ?>
+    {{- "\n" }}
+    {%- set done = [] %}
+</aside>
+<div class="container-sm w-50">
+    <?= $this->Form->create(${{ singularVar }}) ?>
+    <h1 class="text-center"><?= __('{{ action|humanize }} {{ singularHumanName }}') ?></h1>
+    <fieldset>
+        <?php
+{% for field in fields %}
+{%- if field not in primaryKey %}
+    {%- if keyFields[field] is defined %}
+        {%- set fieldData = Bake.columnData(field, schema) %}
+        {%- if fieldData.null %}
+                    echo $this->Form->control('{{ field }}', ['options' => ${{ keyFields[field] }}, 'empty' =>
+        true]);
+        {{- "\n" }}
+        {%- else %}
+            echo $this->Form->control('{{ field }}', ['options' => ${{ keyFields[field] }}]);
+            {{- "\n" }}
+        {%- endif %}
+        {%- elseif field not in ['created', 'modified', 'updated'] %}
+            {%- set fieldData = Bake.columnData(field, schema) %}
+            {%- if fieldData.type in ['date', 'datetime', 'time'] and fieldData.null %}
+                echo $this->Form->control('{{ field }}', ['empty' => true]);
+                {{- "\n" }}
+            {%- else %}
+                echo $this->Form->control('{{ field }}');
+                {{- "\n" }}
+            {%- endif %}
+        {%- endif %}
+        {%- endif %}
+        {%- endfor %}
+
+        {%- if associations.BelongsToMany is defined %}
+            {%- for assocName, assocData in associations.BelongsToMany %}
+                echo $this->Form->control('{{ assocData.property }}._ids', ['options' => ${{ assocData.variable }}]);
+                {{- "\n" }}
+            {%- endfor %}
+        {% endif %}
+        ?>
+    </fieldset>
+    <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-dark w-100']) ?>
+    <?= $this->Form->end() ?>
+</div>

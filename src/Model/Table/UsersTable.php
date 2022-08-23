@@ -29,6 +29,7 @@ use Cake\Validation\Validator;
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  * @property \App\Model\Table\GroupsTable&\Cake\ORM\Association\BelongsToMany $Groups
  * @property \Cake\ORM\Table&\Cake\ORM\Association\HasMany $GroupsUsers
+ * @property \App\Model\Table\ArticlesTable&\Cake\ORM\Association\HasMany $Articles
  */
 class UsersTable extends Table
 {
@@ -56,6 +57,7 @@ class UsersTable extends Table
         ]);
 
         $this->belongsToMany('Groups');
+        $this->hasMany('Articles');
     }
 
     /**

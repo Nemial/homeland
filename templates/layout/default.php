@@ -15,7 +15,6 @@
  * @var \App\View\AppView $this
  */
 
-use Cake\Core\Configure;
 use Cake\I18n\I18n;
 
 $currentPath = $this->request->getPath();
@@ -39,16 +38,16 @@ $selectedNavItemClass = 'text-orange';
     <?= $this->fetch('script') ?>
 </head>
 <body class="page">
-<header class="page__header">
-    <div class="container bg-dark py-3 rounded-bottom mb-4">
+<header class="page__header mb-4">
+    <div class="container bg-dark rounded-bottom">
         <nav class="navbar navbar-expand-sm navbar-dark">
-            <ul class="navbar-nav container-fluid justify-content-between fs-4">
+            <ul class="navbar-nav container-fluid justify-content-between">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-center" href="#" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
                         Меню
                     </a>
-                    <ul class="dropdown-menu fs-4">
+                    <ul class="dropdown-menu">
                         <?php
                         if ($this->Identity->get('is_admin') && $this->Identity->isLoggedIn()) : ?>
                             <?php
@@ -63,12 +62,21 @@ $selectedNavItemClass = 'text-orange';
                         <?php
                         endif; ?>
                         <?php
+                        $articlesPath = $this->Url->buildFromPath('Articles::index');
+                        ?>
+                        <li>
+                            <a class="dropdown-item <?= $currentPath === $articlesPath ? $selectedNavItemClass : '' ?>"
+                               href="<?= $articlesPath ?>">
+                                <?= __('Список статей') ?>
+                            </a>
+                        </li>
+                        <?php
                         $aboutPath = $this->Url->buildFromPath('Pages::about');
                         ?>
                         <li>
                             <a class="dropdown-item <?= $currentPath === $aboutPath ? $selectedNavItemClass : '' ?>"
                                href="<?= $aboutPath ?>">
-                                О сайте
+                                <?= __('О сайте') ?>
                             </a>
                         </li>
                     </ul>
@@ -76,7 +84,7 @@ $selectedNavItemClass = 'text-orange';
                 <li class="nav-item">
                     <a href="<?= $this->Url->buildFromPath('Pages::main') ?>"
                        class="navbar-brand m-0 fs-1">
-                        Blog by
+                        Блог от
                         <span class="text-primary">Nemial</span>
                     </a>
                 </li>
@@ -113,11 +121,11 @@ $selectedNavItemClass = 'text-orange';
         <?= $this->fetch('content') ?>
     </div>
 </main>
-<footer class="page__footer">
-    <div class="container-sm bg-dark fs-4 py-3 rounded-top d-flex justify-content-between">
+<footer class="page__footer mt-4">
+    <div class="container-sm bg-dark py-2 rounded-top d-flex justify-content-between">
         <div class="col">
             <p class="text-white m-0">
-                Powered by
+                <?= __('Сделано на') ?>
                 <a target="_blank" class="ms-1 link-info" href="https://getbootstrap.com/">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                          class="bi bi-bootstrap" viewBox="0 0 16 16">
@@ -129,20 +137,20 @@ $selectedNavItemClass = 'text-orange';
                 </a>
             </p>
             <p class="text-white m-0 opacity-25">
-                Copyright &copy; <?= date('Y') ?> by Nemial
+                &copy; Негрий М. А., <?= date('Y') ?>
             </p>
         </div>
         <div class="text-center">
-            <h4 class="text-white">Контакты</h4>
+            <h4 class="text-white m-0">Контакты</h4>
             <ul class="list-unstyled list-inline m-0">
                 <li class="list-inline-item">
-                    <a class="link link_type_email" href="mailto:<?= Configure::read('Credentials.email') ?>">
+                    <a class="link link_type_email" href="mailto:nemialtred@yandex.ru">
                         Email
                     </a>
                 </li>
                 <li class="list-inline-item">
                     <a class="link link_type_telegram"
-                       href="tg://resolve?domain=<?= Configure::read('Credentials.tg') ?>">
+                       href="tg://resolve?domain=Nemial">
                         Telegram
                     </a>
                 </li>

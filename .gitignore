@@ -52,5 +52,8 @@ nbproject/*
 yarn-debug.log
 yarn-error.log
 
+#migrations
+/config/Migrations/schema-dump-default.lock
+
 # webpack builds
 /webroot/assets/

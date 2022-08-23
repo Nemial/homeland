@@ -7,5 +7,4 @@
 
 use App\View\AppView;
 
-$this->assign('title', 'Blog by Nemial')
-?>
+$this->assign('title', 'Блог от Nemial');

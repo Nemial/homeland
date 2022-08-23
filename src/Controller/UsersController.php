@@ -53,6 +53,13 @@ class UsersController extends AppController
     {
         $this->Authorization->skipAuthorization();
 
+        $result = $this->Authentication->getResult();
+        /** @var \App\Model\Entity\User $authUser */
+        $authUser = $result->getData();
+        if ($result->isValid() && $authUser->is_admin) {
+            return $this->redirect('/');
+        }
+
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
             $userData = $this->request->getData();
