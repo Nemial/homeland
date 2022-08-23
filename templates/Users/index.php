@@ -20,8 +20,8 @@ $this->assign('title', 'Пользователи')
         <thead>
         <tr class="text-center">
             <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-            <th scope="col"><?= $this->Paginator->sort('created_at') ?></th>
-            <th scope="col"><?= $this->Paginator->sort('updated_at') ?></th>
+            <th scope="col"><?= $this->Paginator->sort('created_at', __('Дата создания')) ?></th>
+            <th scope="col"><?= $this->Paginator->sort('updated_at', __('Дата изменения')) ?></th>
             <th scope="col"><?= $this->Paginator->sort('email') ?></th>
             <th scope="col"><?= __('Действия') ?></th>
         </tr>
