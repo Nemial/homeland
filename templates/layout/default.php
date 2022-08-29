@@ -19,6 +19,7 @@ use Cake\I18n\I18n;
 
 $explodedLocaleData = explode('_', I18n::getLocale());
 $currentLang = mb_strtolower($explodedLocaleData[0]);
+$isAdminSection = $this->request->getParam('prefix') === 'Admin';
 
 $this->Html->css(['main'], ['block' => true]);
 $this->Html->script(['bootstrap5', 'main'], ['block' => true]);
@@ -36,20 +37,22 @@ $this->Html->script(['bootstrap5', 'main'], ['block' => true]);
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
-<body class="page">
+<body class="page <?= $isAdminSection ? '' : 'bg-dark' ?>">
 <header class="page__header mb-4">
-    <div class="container-sm bg-dark rounded-bottom">
+    <div
+        class="container-sm rounded-bottom <?= $isAdminSection ? 'bg-dark' : 'border border-3 border-white border-opacity-25' ?>">
         <?= $this->element('header/menu') ?>
     </div>
 </header>
 <main class="page__main">
-    <div class="container">
+    <div class="container h-100">
         <?= $this->Flash->render() ?>
         <?= $this->fetch('content') ?>
     </div>
 </main>
 <footer class="page__footer mt-4">
-    <div class="container-sm bg-dark py-2 rounded-top d-flex justify-content-between">
+    <div
+        class="container-sm py-2 d-flex justify-content-between rounded-top <?= $isAdminSection ? 'bg-dark' : 'border border-3 border-white border-opacity-25' ?>">
         <div>
             <?= $this->element('footer/info') ?>
         </div>

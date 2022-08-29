@@ -1,9 +1,13 @@
 <?php
+
+/**
+ * @var \App\View\AppView $this
+ */
 $currentPath = $this->request->getPath();
 $selectedNavItemClass = 'text-orange';
 ?>
-<nav class="navbar navbar-expand-sm navbar-dark">
-    <ul class="navbar-nav container-fluid justify-content-between">
+<nav class="navbar navbar-expand-sm navbar-dark justify-content-between">
+    <ul class="navbar-nav container-fluid">
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-center" href="#" role="button"
                data-bs-toggle="dropdown" aria-expanded="false">
@@ -11,29 +15,16 @@ $selectedNavItemClass = 'text-orange';
             </a>
             <ul class="dropdown-menu">
                 <?php
-                if ($this->Identity->get('is_admin') && $this->Identity->isLoggedIn()) : ?>
-                    <?php
-                    $listUsersPath = $this->Url->buildFromPath('Users::index');
-                    ?>
-                    <li>
-                        <a class="dropdown-item <?= $currentPath === $listUsersPath ? $selectedNavItemClass : '' ?>"
-                           href="<?= $listUsersPath ?>">
-                            Список пользователей
-                        </a>
-                    </li>
-                <?php
-                endif; ?>
-                <?php
-                $articlesPath = $this->Url->buildFromPath('Articles::index');
+                $articlesPath = $this->Url->build(['_name' => 'blog']);
                 ?>
                 <li>
                     <a class="dropdown-item <?= $currentPath === $articlesPath ? $selectedNavItemClass : '' ?>"
                        href="<?= $articlesPath ?>">
-                        <?= __('Список статей') ?>
+                        <?= __('Блог') ?>
                     </a>
                 </li>
                 <?php
-                $aboutPath = $this->Url->buildFromPath('Pages::about');
+                $aboutPath = $this->Url->build(['_name' => 'about']);
                 ?>
                 <li>
                     <a class="dropdown-item <?= $currentPath === $aboutPath ? $selectedNavItemClass : '' ?>"
@@ -41,19 +32,48 @@ $selectedNavItemClass = 'text-orange';
                         <?= __('О сайте') ?>
                     </a>
                 </li>
+                <?php
+                if ($this->Identity->get('is_admin')): ?>
+                    <hr class="dropdown-divider">
+                    <?php
+                    $listUsersPath = $this->Url->buildFromPath('Admin/Users::index');
+                    ?>
+                    <li>
+                        <a class="dropdown-item <?= $currentPath === $listUsersPath ? $selectedNavItemClass : '' ?>"
+                           href="<?= $listUsersPath ?>">
+                            Список пользователей
+                        </a>
+                    </li>
+                    <?php
+                    $articlesPath = $this->Url->buildFromPath('Admin/Articles::index');
+                    ?>
+                    <li>
+                        <a class="dropdown-item <?= $currentPath === $articlesPath ? $selectedNavItemClass : '' ?>"
+                           href="<?= $articlesPath ?>">
+                            <?= __('Список статей') ?>
+                        </a>
+                    </li>
+                <?php
+                endif; ?>
             </ul>
         </li>
         <li class="nav-item">
-            <a href="<?= $this->Url->buildFromPath('Pages::main') ?>"
+            <a href="<?= $this->Url->build(['_name' => 'home']) ?>"
                class="navbar-brand m-0 fs-1">
                 Блог от
                 <span class="text-primary">Nemial</span>
+                <?php
+                if ($this->Identity->get('is_admin')): ?>
+                    -
+                    <span class="text-orange">Плюс</span>
+                <?php
+                endif; ?>
             </a>
         </li>
         <?php
         if (!$this->Identity->isLoggedIn()) : ?>
             <?php
-            $loginPath = $this->Url->buildFromPath('Users::login');
+            $loginPath = $this->Url->build(['_name' => 'login']);
             $isLoginPage = $loginPath === $currentPath; ?>
             <li class="nav-item">
                 <a class="nav-link <?= $isLoginPage ? 'active' : '' ?>"
@@ -66,7 +86,7 @@ $selectedNavItemClass = 'text-orange';
         else : ?>
             <li class="nav-item">
                 <a class="nav-link"
-                   href='<?= $this->Url->buildFromPath('Users::logout') ?>'>
+                   href='<?= $this->Url->build(['_name' => 'logout']) ?>'>
                     <?= __('Выйти') ?>
                 </a>
             </li>

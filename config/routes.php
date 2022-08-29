@@ -46,27 +46,26 @@ return static function (RouteBuilder $routes) {
     $routes->setRouteClass(DashedRoute::class);
 
     $routes->scope('/', function (RouteBuilder $builder) {
-        /*
-         * Here, we are connecting '/' (base path) to a controller called 'Pages',
-         * its action called 'display', and we pass a param to select the view file
-         * to use (in this case, templates/Pages/home.php)...
-         */
-        $builder->connect('/', ['controller' => 'Pages', 'action' => 'main']);
-        $builder->connect('/about', ['controller' => 'Pages', 'action' => 'about']);
+        $builder->get('/', ['controller' => 'Pages', 'action' => 'main'], 'home');
+        $builder->get('about', ['controller' => 'Pages', 'action' => 'about'], 'about');
+        $builder->get('blog', ['controller' => 'Articles', 'action' => 'index'], 'blog');
+        $builder->get('logout', ['controller' => 'Users', 'action' => 'logout'], 'logout');
 
-        /*
-         * Connect catchall routes for all controllers.
-         *
-         * The `fallbacks` method is a shortcut for
-         *
-         * ```
-         * $builder->connect('/{controller}', ['action' => 'index']);
-         * $builder->connect('/{controller}/{action}/*', []);
-         * ```
-         *
-         * You can remove these routes once you've connected the
-         * routes you want in your application.
-         */
+        $builder
+            ->connect('login', ['controller' => 'Users', 'action' => 'login'], ['_name' => 'login'])
+            ->setMethods(['GET', 'POST']);
+        $builder
+            ->connect(
+                'register',
+                ['controller' => 'Users', 'action' => 'register'],
+                ['_name' => 'register']
+            )
+            ->setMethods(['GET', 'POST']);
+
+        $builder->fallbacks();
+    });
+
+    $routes->prefix('Admin', function (RouteBuilder $builder) {
         $builder->fallbacks();
     });
     /*

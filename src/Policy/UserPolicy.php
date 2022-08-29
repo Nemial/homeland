@@ -56,4 +56,11 @@ class UserPolicy
         $authUser = $identity->getOriginalData();
         return $authUser->is_admin || $authUser->id === $user->id;
     }
+
+    public function canAdd(Identity $identity, User $user): bool
+    {
+        /** @var User $authUser */
+        $authUser = $identity->getOriginalData();
+        return $authUser->is_admin;
+    }
 }

@@ -12,6 +12,9 @@ $dropdown-link-active-color: $black;
 
 $custom-colors: (
     "orange": $orange,
+    'red-bitrix': $red-600,
+    'blue-light': $blue-200,
+    'teal-light': $teal-200
 );
 
 $theme-colors: map-merge($theme-colors, $custom-colors);

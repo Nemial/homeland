@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
 <p class="text-white m-0">
     <?= __('Сделано на') ?>
     <a target="_blank" class="ms-1 link-info" href="https://getbootstrap.com/">

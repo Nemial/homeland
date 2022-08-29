@@ -35,7 +35,7 @@ $this->assign('title', __('Вход'))
     <?= $this->Form->button(__('Войти'), ['class' => 'btn btn-dark w-100 mb-3']); ?>
     <p>
         Если нет аккаунта, то поможет
-        <a class="link-primary" href="<?= $this->Url->buildFromPath('Users::add') ?>">
+        <a class="link-primary" href="<?= $this->Url->build(['_name' => 'register']) ?>">
             <?= __('Регистрация') ?>
         </a>
     </p>
