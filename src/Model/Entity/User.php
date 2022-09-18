@@ -20,6 +20,7 @@ use Cake\ORM\Entity;
  * @property string $group_string
  * @property bool $is_admin
  * @property \App\Model\Entity\Article[] $articles
+ * @property string $name
  */
 class User extends Entity
 {
@@ -31,7 +32,8 @@ class User extends Entity
     public const FIELD_GROUPS = 'groups';
     public const FIELD_GROUP_STRING = 'group_string';
     public const FIELD_IS_ADMIN = 'is_admin';
-	public const FIELD_ARTICLES = 'articles';
+    public const FIELD_ARTICLES = 'articles';
+	public const FIELD_NAME = 'name';
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *
@@ -47,6 +49,7 @@ class User extends Entity
         'email' => true,
         'password' => true,
         'groups' => true,
+        'name' => true,
     ];
     /**
      * Fields that are excluded from JSON versions of the entity.
@@ -86,7 +89,6 @@ class User extends Entity
         if (isset($this->_fields['is_admin'])) {
             return $this->_fields['is_admin'];
         }
-
 
         if (empty($this->groups)) {
             return false;

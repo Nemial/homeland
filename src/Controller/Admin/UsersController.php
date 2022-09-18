@@ -92,7 +92,11 @@ class UsersController extends AppController
         $this->Authorization->authorize($user);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
+            $user = $this->Users->patchEntity(
+                $user,
+                $this->request->getData(),
+                ['accessibleFields' => ['id' => false]]
+            );
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('Пользователь обновлён'));
 

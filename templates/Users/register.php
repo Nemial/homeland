@@ -7,10 +7,23 @@
 
 $this->assign('title', __('Регистрация'));
 ?>
-<div class="container-sm w-50">
+<div class="container-sm w-50 text-white">
     <?= $this->Form->create($user) ?>
     <h1 class="text-center"><?= __('Регистрация') ?></h1>
     <fieldset>
+        <div class="mb-3">
+            <label for="name" class="form-label"><?= __('Логин') ?></label>
+            <?= $this->Form->text(
+                'name',
+                [
+                    'id' => 'name',
+                    'class' => 'form-control',
+                    'required' => true,
+                    'max' => 30,
+                    'pattern' => '[a-zA-Z0-9а-яА-Я]+',
+                ]
+            ) ?>
+        </div>
         <div class="mb-3">
             <label for="email" class="form-label"><?= __('Email') ?></label>
             <?= $this->Form->email(
@@ -26,6 +39,6 @@ $this->assign('title', __('Регистрация'));
             ) ?>
         </div>
     </fieldset>
-    <?= $this->Form->button(__('Зарегистрироваться'), ['class' => 'btn btn-dark w-100']); ?>
+    <?= $this->Form->button(__('Зарегистрироваться'), ['class' => 'btn btn-secondary w-100']); ?>
     <?= $this->Form->end() ?>
 </div>

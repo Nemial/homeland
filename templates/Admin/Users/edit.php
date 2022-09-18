@@ -29,6 +29,13 @@ $this->assign('title', "Обновить пользователя #$user->id")
     <fieldset>
         <h2 class="text-center"><?= __('Редактирование пользователя') ?></h2>
         <div class="mb-3">
+            <label for="name" class="form-label"><?= __('Логин') ?></label>
+            <?= $this->Form->text(
+                'name',
+                ['id' => 'name', 'class' => 'form-control', 'required' => true]
+            ) ?>
+        </div>
+        <div class="mb-3">
             <label for="email" class="form-label"><?= __('Email') ?></label>
             <?= $this->Form->email(
                 'email',

@@ -33,6 +33,10 @@ $this->assign('title', "Пользователь #{$user->id}")
 <div class="d-flex flex-column justify-content-start">
     <h2>#<?= h($user->id) ?></h2>
     <table class="table">
+        <tr class="table-primary">
+            <th><?= __('Логин') ?></th>
+            <td><?= h($user->name) ?></td>
+        </tr>
         <tr class="table-info">
             <th><?= __('Email') ?></th>
             <td><?= h($user->email) ?></td>
@@ -49,7 +53,7 @@ $this->assign('title', "Пользователь #{$user->id}")
             <th><?= __('Updated At') ?></th>
             <td><?= h($user->updated_at) ?></td>
         </tr>
-        <tr class="table-info">
+        <tr class="table-dark">
             <th><?= __('Группы') ?></th>
             <td><?= h($user->group_string) ?></td>
         </tr>

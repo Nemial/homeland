@@ -23,6 +23,7 @@ $this->assign('title', 'Пользователи')
             <th scope="col"><?= $this->Paginator->sort('created_at', __('Дата создания')) ?></th>
             <th scope="col"><?= $this->Paginator->sort('updated_at', __('Дата изменения')) ?></th>
             <th scope="col"><?= $this->Paginator->sort('email') ?></th>
+            <th scope="col"><?= $this->Paginator->sort('name') ?></th>
             <th scope="col"><?= __('Действия') ?></th>
         </tr>
         </thead>
@@ -34,6 +35,7 @@ $this->assign('title', 'Пользователи')
                 <td><?= h($user->created_at) ?></td>
                 <td><?= h($user->updated_at) ?></td>
                 <td><?= h($user->email) ?></td>
+                <td><?= h($user->name) ?></td>
                 <td class="d-flex justify-content-around">
                     <?= $this->Html->link(__('Просмотр'), ['action' => 'view', $user->id], [
                         'class' => 'link-dark',

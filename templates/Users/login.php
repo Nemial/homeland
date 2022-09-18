@@ -6,7 +6,7 @@
 
 $this->assign('title', __('Вход'))
 ?>
-<div class="container-sm w-50">
+<div class="container-sm w-50 text-white">
     <?= $this->Form->create() ?>
     <h1 class="text-center"><?= __('Вход') ?></h1>
     <fieldset>
@@ -32,10 +32,10 @@ $this->assign('title', __('Вход'))
             ) ?>
         </div>
     </fieldset>
-    <?= $this->Form->button(__('Войти'), ['class' => 'btn btn-dark w-100 mb-3']); ?>
+    <?= $this->Form->button(__('Войти'), ['class' => 'btn btn-secondary w-100 mb-3']); ?>
     <p>
         Если нет аккаунта, то поможет
-        <a class="link-primary" href="<?= $this->Url->build(['_name' => 'register']) ?>">
+        <a class="link-info-dark" href="<?= $this->Url->build(['_name' => 'register']) ?>">
             <?= __('Регистрация') ?>
         </a>
     </p>

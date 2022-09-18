@@ -2,6 +2,9 @@
 /**
  * @var \App\View\AppView $this
  */
+
+use App\Helpers\Constant;
+
 ?>
 <p class="text-white m-0">
     <?= __('Сделано на') ?>
@@ -16,5 +19,12 @@
     </a>
 </p>
 <p class="text-white m-0 opacity-25">
-    &copy; Негрий М. А., <?= date('Y') ?>
+    &copy; Негрий М. А., <?php
+    if (date('Y') !== Constant::yearWebsiteLaunch): ?>
+        <?= Constant::yearWebsiteLaunch ?> - <?= date('Y') ?>
+    <?php
+    else: ?>
+        <?= date('Y') ?>
+    <?php
+    endif; ?>
 </p>

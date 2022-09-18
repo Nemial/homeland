@@ -83,6 +83,12 @@ class UsersTable extends Table
             ->notEmptyString('email');
 
         $validator
+            ->notEmptyString('name')
+            ->maxLength('name', 30, __('Слишком длинный логин'))
+            ->requirePresence('name', 'create')
+            ->regex('name', '/[a-zA-Z0-9а-яА-Я]+/', 'В логине присутствуют запрещённые символы');
+
+        $validator
             ->scalar('password')
             ->maxLength('password', 255)
             ->requirePresence('password', 'create')
@@ -101,7 +107,14 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->isUnique(['email']), ['errorField' => 'email']);
+        $rules->add(
+            $rules->isUnique(['email']),
+            ['errorField' => 'email', 'message' => __('Пользователь с такой почтой уже существует')]
+        );
+        $rules->add(
+            $rules->isUnique(['name']),
+            ['errorField' => 'name', 'message' => __('Такой логин уже существует')]
+        );
 
         return $rules;
     }

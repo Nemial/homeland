@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Helpers\Tools;
 use Cake\Event\EventInterface;
 use Cake\Http\Response;
 
@@ -33,22 +34,18 @@ class UsersController extends AppController
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
             $userData = $this->request->getData();
-            $query = $this->Users->findByEmail($userData['email']);
-            if ($query->count() !== 0) {
-                $this->Flash->error(__('Пользователь с такой почтой уже существует'));
-                return $this->redirect(['action' => 'add']);
-            }
 
             $user = $this->Users->patchEntity($user, $userData);
 
             $defaultGroup = $this->Users->Groups->findByName('user')->firstOrFail();
             $user->groups = [$defaultGroup];
-
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('Пользователь создан'));
                 return $this->redirect(['action' => 'login']);
             }
-            $this->Flash->error(__('Произошла ошибка при сохранении. Попробуйте позже'));
+
+            $errors = Tools::stringifyErrors($user->getErrors());
+            $this->Flash->error($errors);
         }
         $this->set(compact('user'));
     }
